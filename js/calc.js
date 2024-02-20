@@ -1,7 +1,8 @@
-let a, b, op, display;
+let a, b, op;
+let display = "";
 const BUTTONS = document.querySelectorAll(".button");
 const NUMPAD = [...BUTTONS].filter((button) => button.dataset.numpad);
-const ACTION = [...BUTTONS].filter((button) => button.dataset.action);
+const ACTIONS = [...BUTTONS].filter((button) => button.dataset.action);
 
 // operate() takes in two numbers and an operator
 // then performs the relevant operation.
@@ -31,6 +32,14 @@ const toDisplay = (inputString, replace = false) => {
   if (replace) {
     display = inputString;
   } else {
+    if (inputString === ".") {
+      if (display.indexOf(".") !== -1) {
+        return;
+      }
+      if (display.length === 0) {
+        display += "0";
+      }
+    }
     display += inputString;
   }
   refreshDisplay();
@@ -44,13 +53,43 @@ const clearDisplay = () => {
   document.querySelector("#output").textContent = "0";
 };
 
+const flipSign = () => {
+  if (display.length === 0) {
+    return;
+  }
+  if (display[0] === "-") {
+    display = display.slice(1);
+  } else {
+    display = "-" + display;
+  }
+  refreshDisplay();
+};
+
+const btnPress = (button) => {
+  const action = button.target.dataset.action;
+  switch (action) {
+    case "AC":
+      clearDisplay();
+      break;
+    case "+/-":
+      flipSign();
+      break;
+    default:
+      console.error(
+        `Invalid button press detected, (does it contain dataset "data-action"?):`,
+        button.target
+      );
+  }
+};
+
 // Add event listeners
-NUMPAD.forEach((btn) => {
+NUMPAD.forEach((btn) =>
   btn.addEventListener("click", (e) => {
     toDisplay(e.target.dataset.numpad);
-    console.log(display);
-  });
-});
+  })
+);
+
+ACTIONS.forEach((btn) => btn.addEventListener("click", (e) => btnPress(e)));
 
 const Add = (a, b) => {
   return a + b;
