@@ -150,11 +150,6 @@ NUMPAD.forEach((btn) =>
 
 ACTIONS.forEach((btn) => btn.addEventListener("click", (e) => btnPress(e)));
 
-// const buttonExceptAction
-// BUTTONS.forEach((btn) => btn.addEventListener("click", (e) => {
-
-// }));
-
 const Add = (a, b) => {
   return a + b;
 };
