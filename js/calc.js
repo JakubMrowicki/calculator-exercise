@@ -1,4 +1,7 @@
 let a, b, op, display;
+const BUTTONS = document.querySelectorAll(".button");
+const NUMPAD = [...BUTTONS].filter((button) => button.dataset.numpad);
+const ACTION = [...BUTTONS].filter((button) => button.dataset.action);
 
 // operate() takes in two numbers and an operator
 // then performs the relevant operation.
@@ -23,19 +26,31 @@ const operate = (a, b, operator) => {
 };
 
 // toDisplay appends a character to the display.
-const toDisplay = (character) => {
+const toDisplay = (inputString) => {
   if (typeof display === "undefined") display = "";
-  display += character;
-  updateDisplay();
+  if (inputString.length > 1) {
+    display = inputString;
+  } else {
+    display += inputString;
+  }
+  refreshDisplay();
 };
 
-const updateDisplay = () =>
-  (document.querySelector("#output").textContent = display);
+const refreshDisplay = () =>
+  (document.querySelector("#output").textContent = `\u200E${display}\u200E`);
 
 const clearDisplay = () => {
   display = "";
-  document.querySelector("#output").textContent = "";
+  document.querySelector("#output").textContent = "0";
 };
+
+// Add event listeners
+NUMPAD.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    toDisplay(e.target.dataset.numpad);
+    console.log(display);
+  });
+});
 
 const Add = (a, b) => {
   return a + b;
