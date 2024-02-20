@@ -1,4 +1,4 @@
-let a, b, op;
+let a, b, op, display;
 
 // operate() takes in two numbers and an operator
 // then performs the relevant operation.
@@ -21,6 +21,16 @@ const operate = (a, b, operator) => {
       return console.error(`Operator ("${operator}") not supported.`);
   }
 };
+
+// toDisplay appends a character to the display.
+const toDisplay = (character) => {
+  if (typeof display === "undefined") display = "";
+  display += character;
+  updateDisplay();
+};
+
+const updateDisplay = () =>
+  (document.querySelector("#output").textContent = display);
 
 const Add = (a, b) => {
   return a + b;
