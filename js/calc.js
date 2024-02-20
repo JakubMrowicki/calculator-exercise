@@ -2,7 +2,6 @@ let a,
   b = undefined;
 let op,
   display = "0";
-let log = [];
 const BUTTONS = document.querySelectorAll(".button");
 const NUMPAD = [...BUTTONS].filter((button) => button.dataset.numpad);
 const ACTIONS = [...BUTTONS].filter((button) => button.dataset.action);
@@ -95,7 +94,7 @@ const actionClick = (action) => {
     } else {
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
-      log = [...log, `${a} ${op} ${b} = ${display}`];
+      addHistoryLog(`${a} ${op} ${b} = ${display}`);
       a = parseFloat(display);
       display = "";
       b = undefined;
@@ -108,7 +107,7 @@ const actionClick = (action) => {
       }
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
-      log = [...log, `${a} ${op} ${b} = ${display}`];
+      addHistoryLog(`${a} ${op} ${b}`, display);
       display = "";
       a = undefined;
       b = undefined;
@@ -156,6 +155,19 @@ NUMPAD.forEach((btn) => {
 });
 
 ACTIONS.forEach((btn) => btn.addEventListener("click", (e) => btnPress(e)));
+
+const addHistoryLog = (expression, answer) => {
+  const historyLog = document.querySelector(".history");
+  const element = document.createElement("div");
+  element.classList.add("log");
+  const expSpan = document.createElement("span");
+  const ansSpan = document.createElement("span");
+  expSpan.textContent = expression;
+  ansSpan.textContent = answer;
+  element.appendChild(expSpan);
+  element.appendChild(ansSpan);
+  historyLog.prepend(element);
+};
 
 const Add = (a, b) => {
   return a + b;

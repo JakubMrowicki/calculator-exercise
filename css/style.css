@@ -12,6 +12,47 @@ body {
   display: flex;
   height: 100vh;
   align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 900px;
+  display: flex;
+  gap: 8px;
+}
+
+.history {
+  height: 600px;
+  background-color: gray;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.history .log {
+  background-color: lightgray;
+  font-style: italic;
+  padding: 8px 16px;
+}
+
+.history .log:nth-child(even) {
+  background-color: rgb(158, 158, 158);
+}
+
+.history .log:nth-child(1) {
+  font-weight: bold;
+}
+
+.log span {
+  display: block;
+  font-size: large;
+}
+
+.log span:nth-child(1) {
+  border-bottom: 1px solid black;
+}
+
+.log span:nth-child(2) {
+  font-size: 24px;
 }
 
 .calculator-body {

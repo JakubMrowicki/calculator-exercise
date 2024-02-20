@@ -8,39 +8,47 @@
     <script src="./js/calc.js" defer></script>
   </head>
   <body>
-    <div class="calculator-body">
-      <div class="calculator-screen">
-        <span id="output">0</span>
+    <div class="container">
+      <div class="calculator-body">
+        <div class="calculator-screen">
+          <span id="output">0</span>
+        </div>
+        <div class="buttons">
+          <div class="row">
+            <div class="button clear" data-action="AC">AC</div>
+            <div class="button functional" data-action="+/-">+/-</div>
+            <div class="button functional" data-action="%">%</div>
+            <div class="button functional" data-action="/">/</div>
+          </div>
+          <div class="row">
+            <div class="button" data-numpad="7">7</div>
+            <div class="button" data-numpad="8">8</div>
+            <div class="button" data-numpad="9">9</div>
+            <div class="button functional" data-action="*">*</div>
+          </div>
+          <div class="row">
+            <div class="button" data-numpad="4">4</div>
+            <div class="button" data-numpad="5">5</div>
+            <div class="button" data-numpad="6">6</div>
+            <div class="button functional" data-action="-">-</div>
+          </div>
+          <div class="row">
+            <div class="button" data-numpad="1">1</div>
+            <div class="button" data-numpad="2">2</div>
+            <div class="button" data-numpad="3">3</div>
+            <div class="button functional" data-action="+">+</div>
+          </div>
+          <div class="row">
+            <div class="button two-wide" data-numpad="0">0</div>
+            <div class="button" data-numpad=".">.</div>
+            <div class="button functional" data-action="=">=</div>
+          </div>
+        </div>
       </div>
-      <div class="buttons">
-        <div class="row">
-          <div class="button clear" data-action="AC">AC</div>
-          <div class="button functional" data-action="+/-">+/-</div>
-          <div class="button functional" data-action="%">%</div>
-          <div class="button functional" data-action="/">/</div>
-        </div>
-        <div class="row">
-          <div class="button" data-numpad="7">7</div>
-          <div class="button" data-numpad="8">8</div>
-          <div class="button" data-numpad="9">9</div>
-          <div class="button functional" data-action="*">*</div>
-        </div>
-        <div class="row">
-          <div class="button" data-numpad="4">4</div>
-          <div class="button" data-numpad="5">5</div>
-          <div class="button" data-numpad="6">6</div>
-          <div class="button functional" data-action="-">-</div>
-        </div>
-        <div class="row">
-          <div class="button" data-numpad="1">1</div>
-          <div class="button" data-numpad="2">2</div>
-          <div class="button" data-numpad="3">3</div>
-          <div class="button functional" data-action="+">+</div>
-        </div>
-        <div class="row">
-          <div class="button two-wide" data-numpad="0">0</div>
-          <div class="button" data-numpad=".">.</div>
-          <div class="button functional" data-action="=">=</div>
+      <div class="history">
+        <div class="log">
+          <span>15 + 5</span>
+          <span>20</span>
         </div>
       </div>
     </div>
