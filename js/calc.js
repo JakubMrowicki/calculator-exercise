@@ -21,3 +21,19 @@ const operate = (a, b, operator) => {
       return console.error(`Operator ("${operator}") not supported.`);
   }
 };
+
+const Add = (a, b) => {
+  return a + b;
+};
+
+const Subtract = (a, b) => {
+  return a - b;
+};
+
+const Multiply = (a, b) => {
+  return a * b;
+};
+
+const Divide = (a, b) => {
+  return a / b;
+};
