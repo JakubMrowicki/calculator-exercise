@@ -41,6 +41,10 @@ const toDisplay = (inputString, replace = false) => {
         display += inputString;
         refreshDisplay();
         return;
+      } else {
+        display += inputString;
+        refreshDisplay();
+        return;
       }
     }
     display += inputString;
@@ -54,7 +58,7 @@ const refreshDisplay = () =>
   (document.querySelector("#output").textContent = `\u200E${display}\u200E`);
 
 const clearDisplay = () => {
-  display = "";
+  display = "0";
   document.querySelector("#output").textContent = "0";
 };
 
@@ -96,7 +100,7 @@ const actionClick = (action) => {
       toDisplay(operate(a, b, op).toString(), true);
       addHistoryLog(`${a} ${op} ${b} = ${display}`);
       a = parseFloat(display);
-      display = "";
+      display = "0";
       b = undefined;
       op = action;
     }
@@ -108,7 +112,7 @@ const actionClick = (action) => {
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
       addHistoryLog(`${a} ${op} ${b}`, display);
-      display = "";
+      display = "0";
       a = undefined;
       b = undefined;
       op = "";
