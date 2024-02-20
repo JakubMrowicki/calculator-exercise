@@ -2,6 +2,7 @@ let a,
   b = undefined;
 let op,
   display = "0";
+let log = [];
 const BUTTONS = document.querySelectorAll(".button");
 const NUMPAD = [...BUTTONS].filter((button) => button.dataset.numpad);
 const ACTIONS = [...BUTTONS].filter((button) => button.dataset.action);
@@ -84,26 +85,31 @@ const actionClick = (action) => {
   if (["+", "-", "*", "/"].indexOf(action) !== -1) {
     if (typeof a === "undefined") {
       if (parseFloat(display) === 0) return;
-      a = parseFloat(display);
+      a =
+        parseFloat(display) ||
+        parseFloat(
+          document.querySelector("#output").textContent.replace(/[^0-9.]/g, "")
+        );
       op = action;
       clearDisplay();
     } else {
-      if (op !== action) {
-        op = action;
-        return;
-      }
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
+      log = [...log, `${a} ${op} ${b} = ${display}`];
       a = parseFloat(display);
       display = "";
       b = undefined;
+      op = action;
     }
   } else if (action === "=") {
     if (a && op !== "") {
       if (display === "") {
         return;
       }
-      toDisplay(operate(a, parseFloat(display), op).toString(), true);
+      b = parseFloat(display);
+      toDisplay(operate(a, b, op).toString(), true);
+      log = [...log, `${a} ${op} ${b} = ${display}`];
+      display = "";
       a = undefined;
       b = undefined;
       op = "";
@@ -142,11 +148,12 @@ const btnPress = (button) => {
 };
 
 // Add event listeners
-NUMPAD.forEach((btn) =>
+NUMPAD.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     toDisplay(e.target.dataset.numpad);
-  })
-);
+    removeActiveClassFromAll();
+  });
+});
 
 ACTIONS.forEach((btn) => btn.addEventListener("click", (e) => btnPress(e)));
 
@@ -163,5 +170,6 @@ const Multiply = (a, b) => {
 };
 
 const Divide = (a, b) => {
+  if (a === 0 || b === 0) return 0;
   return a / b;
 };
