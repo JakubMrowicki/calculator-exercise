@@ -73,7 +73,7 @@ const flipSign = () => {
 };
 
 const toPercent = () => {
-  if (display === "") {
+  if (display === "0") {
     display = document
       .querySelector("#output")
       .textContent.replace(/[^0-9.]/g, "");
@@ -87,7 +87,6 @@ const toPercent = () => {
 const actionClick = (action) => {
   if (["+", "-", "*", "/"].indexOf(action) !== -1) {
     if (typeof a === "undefined") {
-      if (parseFloat(display) === 0) return;
       a =
         parseFloat(display) ||
         parseFloat(
@@ -98,7 +97,7 @@ const actionClick = (action) => {
     } else {
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
-      addHistoryLog(`${a} ${op} ${b} = ${display}`);
+      addHistoryLog(`${a} ${op} ${b}`, display);
       a = parseFloat(display);
       display = "0";
       b = undefined;
@@ -186,6 +185,9 @@ const Multiply = (a, b) => {
 };
 
 const Divide = (a, b) => {
-  if (a === 0 || b === 0) return 0;
+  if (a === 0 || b === 0) {
+    alert("Dividing by 0 eh?");
+    return 0;
+  }
   return a / b;
 };
