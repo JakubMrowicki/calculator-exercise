@@ -25,10 +25,10 @@ const operate = (a, b, operator) => {
   }
 };
 
-// toDisplay appends a character to the display.
-const toDisplay = (inputString) => {
+// toDisplay appends a character to the display or replaces it entirely.
+const toDisplay = (inputString, replace = false) => {
   if (typeof display === "undefined") display = "";
-  if (inputString.length > 1) {
+  if (replace) {
     display = inputString;
   } else {
     display += inputString;
