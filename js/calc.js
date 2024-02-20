@@ -83,10 +83,15 @@ const toPercent = () => {
 const actionClick = (action) => {
   if (["+", "-", "*", "/"].indexOf(action) !== -1) {
     if (typeof a === "undefined") {
+      if (parseFloat(display) === 0) return;
       a = parseFloat(display);
       op = action;
       clearDisplay();
     } else {
+      if (op !== action) {
+        op = action;
+        return;
+      }
       b = parseFloat(display);
       toDisplay(operate(a, b, op).toString(), true);
       a = parseFloat(display);
@@ -104,11 +109,15 @@ const actionClick = (action) => {
       op = "";
     }
   }
-  console.log(a, b, op, display);
+};
+
+const removeActiveClassFromAll = () => {
+  ACTIONS.forEach((btn) => btn.classList.remove("active"));
 };
 
 const btnPress = (button) => {
   const action = button.target.dataset.action;
+  removeActiveClassFromAll();
   switch (action) {
     case "AC":
       a = b = op = undefined;
@@ -123,7 +132,11 @@ const btnPress = (button) => {
     case "%":
       toPercent();
       break;
+    case "=":
+      actionClick(action);
+      break;
     default:
+      button.target.classList.add("active");
       actionClick(action);
   }
 };
@@ -136,6 +149,11 @@ NUMPAD.forEach((btn) =>
 );
 
 ACTIONS.forEach((btn) => btn.addEventListener("click", (e) => btnPress(e)));
+
+// const buttonExceptAction
+// BUTTONS.forEach((btn) => btn.addEventListener("click", (e) => {
+
+// }));
 
 const Add = (a, b) => {
   return a + b;
