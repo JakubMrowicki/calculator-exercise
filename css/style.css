@@ -45,6 +45,7 @@ body {
 }
 
 .buttons {
+  user-select: none;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -58,12 +59,34 @@ body {
 }
 
 .button {
+  box-sizing: border-box;
   flex-basis: 25%;
   background-color: lightgray;
   font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.button:hover {
+  -webkit-box-shadow: inset 0px 0px 38px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0px 0px 38px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 38px 0px rgba(0, 0, 0, 0.25);
+}
+
+.button:active,
+.active {
+  -webkit-box-shadow: inset 0px 0px 38px 40px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0px 0px 38px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px 0px 38px 40px rgba(0, 0, 0, 0.25);
+}
+
+.button.functional {
+  background-color: rgb(138, 255, 138);
+}
+
+.button.clear {
+  background-color: rgb(255, 170, 170);
 }
 
 .two-wide {
