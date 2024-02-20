@@ -32,6 +32,11 @@ const toDisplay = (character) => {
 const updateDisplay = () =>
   (document.querySelector("#output").textContent = display);
 
+const clearDisplay = () => {
+  display = "";
+  document.querySelector("#output").textContent = "";
+};
+
 const Add = (a, b) => {
   return a + b;
 };
