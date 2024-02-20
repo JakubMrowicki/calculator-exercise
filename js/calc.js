@@ -28,7 +28,6 @@ const operate = (a, b, operator) => {
 
 // toDisplay appends a character to the display or replaces it entirely.
 const toDisplay = (inputString, replace = false) => {
-  if (typeof display === "undefined") display = "";
   if (replace) {
     display = inputString;
   } else {
@@ -46,6 +45,7 @@ const toDisplay = (inputString, replace = false) => {
 };
 
 const refreshDisplay = () =>
+  // \u200E is required due to use of RTL text for left side ellipsis.
   (document.querySelector("#output").textContent = `\u200E${display}\u200E`);
 
 const clearDisplay = () => {
@@ -54,14 +54,18 @@ const clearDisplay = () => {
 };
 
 const flipSign = () => {
-  if (display.length === 0) {
-    return;
-  }
+  if (display.length === 0) return;
   if (display[0] === "-") {
     display = display.slice(1);
   } else {
     display = "-" + display;
   }
+  refreshDisplay();
+};
+
+const toPercent = () => {
+  if (parseFloat(display) === 0 || display === "") return;
+  display = (parseFloat(display) / 100).toString();
   refreshDisplay();
 };
 
@@ -73,6 +77,9 @@ const btnPress = (button) => {
       break;
     case "+/-":
       flipSign();
+      break;
+    case "%":
+      toPercent();
       break;
     default:
       console.error(
