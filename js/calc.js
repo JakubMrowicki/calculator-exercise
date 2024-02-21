@@ -36,11 +36,6 @@ const toDisplay = (inputString, replace = false) => {
     if (inputString === ".") {
       if (display.indexOf(".") !== -1) {
         return;
-      }
-      if (display[0] === "0") {
-        display += inputString;
-        refreshDisplay();
-        return;
       } else {
         display += inputString;
         refreshDisplay();
@@ -49,7 +44,7 @@ const toDisplay = (inputString, replace = false) => {
     }
     display += inputString;
   }
-  display = (parseFloat(display) - 0).toString();
+  display = (parseFloat(Math.round(display * 10000) / 10000) - 0).toString();
   refreshDisplay();
 };
 
